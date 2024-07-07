@@ -36,13 +36,13 @@ export default function TemporaryDrawer() {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {['Home', 'New analysis', 'Analysis in progress', 'Analysis finished'].map((text, index) => (
+    <Box sx={{ width: 250, bgcolor:'#424769', height:'100rem' }}  role="presentation" onClick={toggleDrawer(false)} >
+      <List sx={{color:'#f9b174'}}>
+        {['Home', 'Nuevo análisis', 'Análisis en proceso', 'Análisis terminado'].map((text, index) => (
           <ListItem key={text} disablePadding onClick={() => {index == 0 && navigate('/') || index == 1 && navigate('/new_analysis') || index == 2 && navigate('/processing_analysis') || index == 3 && navigate('/analysis_finished')}}>
             <ListItemButton>
               <ListItemIcon>
-                {index == 0 && <HomeIcon /> || index == 1 && <AddCircleOutlineIcon /> || index == 2 && <DownloadingIcon /> || index == 3 && <HistoryIcon />}
+                {index == 0 && <HomeIcon color='primary'/> || index == 1 && <AddCircleOutlineIcon color='primary'/> || index == 2 && <DownloadingIcon color='primary'/> || index == 3 && <HistoryIcon color='primary'/>}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -52,9 +52,9 @@ export default function TemporaryDrawer() {
         <ListItem key={'SignOut'} disablePadding onClick={() => {signOut(auth)}} sx={{display:{md:'none'}}}>
         <ListItemButton>
             <ListItemIcon>
-            <ExitToAppIcon />
+            <ExitToAppIcon color='primary'/>
             </ListItemIcon>
-            <ListItemText primary={'Sign out'} />
+            <ListItemText primary={'Cerrar sesión'} />
         </ListItemButton>
         </ListItem>
       </List>
@@ -64,24 +64,24 @@ export default function TemporaryDrawer() {
   return (
     <>
         <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed">
+        <AppBar position="fixed" color='secondary'> 
             <Toolbar>
             <IconButton
                 size="large"
                 edge="start"
-                color="inherit"
+                color="primary"
                 aria-label="menu"
                 onClick={toggleDrawer(true)}
                 sx={{ mr: 2 }}
             >
                 <MenuIcon />
             </IconButton>
-            <Typography variant="h6" fontFamily={'fantasy'} fontSize={'35px'} component="div" sx={{ flexGrow: 1, cursor:'pointer' }} onClick={()=>{navigate('/')}}>
+            <Typography color={'primary'} variant="h6" fontFamily={'fantasy'} fontSize={'35px'} component="div" sx={{ flexGrow: 1, cursor:'pointer' }} onClick={()=>{navigate('/')}}>
                 Chat Analyzer
             </Typography>
             <Box sx={{display:{xs:'none', md:'flex'}}} gap={'25px'}>
-              <Button variant='outlined' color="inherit" onClick={() => {signOut(auth)}}>Sign Out</Button>
-              <Box display={'flex'} gap={'5px'} justifyContent={'center'} m={'auto'}><AccountCircleIcon /><Typography>{currentUser.displayName}</Typography></Box>
+              <Button variant='outlined' color="primary" onClick={() => {signOut(auth)}}>Cerrar sesión</Button>
+              <Box sx={{color:"#f9b174"}} display={'flex'} gap={'5px'} justifyContent={'center'} m={'auto'}><AccountCircleIcon /><Typography>{currentUser.displayName}</Typography></Box>
             </Box>
             </Toolbar>
         </AppBar>

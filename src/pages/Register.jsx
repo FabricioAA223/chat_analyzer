@@ -46,7 +46,7 @@ const Register = () => {
 
   const inputStyles = {
     margin: '10px 0',
-    bgcolor:'white',
+    bgcolor:'#676f9d',
     borderRadius:'5px'
   };
 
@@ -57,17 +57,17 @@ const Register = () => {
   const linkStyles = {
     display: 'block',
     textDecoration: 'none',
-    color: 'inherit',
+    color: 'white',
     textAlign: 'center',
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{mt:'100px', border:'1px white solid', p:"15px", borderRadius:"15px", bgcolor:'lightblue'}}>
+    <Container component="main" maxWidth="xs" sx={{mt:'100px', border:'1px white solid', p:"15px", borderRadius:"15px", bgcolor:'#424769'}}>
       <div>
-        <Typography component="h1" variant="h3" sx={{ textAlign: 'center', color:'darkblue', fontFamily:'fantasy' }}>
+        <Typography color={'primary'} component="h1" variant="h3" sx={{ textAlign: 'center', fontFamily:'fantasy' }}>
           CHAT ANALYZER
         </Typography>
-        <Typography component="h5" variant="body2"  textAlign={'center'} sx={{ textAlign: 'center', color:"gray" }}>
+        <Typography color={'white'} component="h5" variant="body2"  textAlign={'center'}>
           Regístrate
         </Typography>
         <form noValidate onSubmit={handleSubmit} sx={{ marginTop: 1 }}>

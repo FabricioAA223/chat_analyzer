@@ -33,6 +33,8 @@ const Login = () => {
 
   const inputStyles = {
     margin: '10px 0',
+    bgcolor:'#676f9d',
+    borderRadius:'5px'
   };
 
   const buttonStyles = {
@@ -42,17 +44,17 @@ const Login = () => {
   const linkStyles = {
     display: 'block',
     textDecoration: 'none',
-    color: 'inherit',
+    color: 'white',
     textAlign: 'center',
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{mt:'100px', border:'1px white solid', p:"15px", borderRadius:"15px", bgcolor:'lightblue'}}>
+    <Container component="main" maxWidth="xs" sx={{mt:'100px', border:'1px white solid', p:"15px", borderRadius:"15px", bgcolor:'#424769'}}>
       <div>
-        <Typography component="h1" variant="h3" sx={{ textAlign: 'center', color:'darkblue', fontFamily:'fantasy' }}>
+        <Typography color={'primary'} component="h1" variant="h3" sx={{ textAlign: 'center', fontFamily:'fantasy' }}>
           CHAT ANALYZER
         </Typography>
-        <Typography component="h5" variant="body2"  textAlign={'center'} sx={{ textAlign: 'center', color:"gray" }}>
+        <Typography component="h5" variant="body2"  textAlign={'center'} color={'whitesmoke'}>
           Ingresa
         </Typography>
         <form noValidate onSubmit={handleSubmit} sx={{ marginTop: 1 }}>
@@ -65,6 +67,7 @@ const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            
             onChange={handleEmailChange}
             sx={inputStyles}
           />
@@ -89,7 +92,7 @@ const Login = () => {
           >
             Iniciar Sesión
           </Button>
-          {err && <Typography textAlign={'center'}>Algo salió mal :(</Typography>}
+          {err && <Typography color={'white'} textAlign={'center'}>Algo salió mal :(</Typography>}
           <Link to="/signup" >
             <Typography sx={linkStyles} variant="body2" color="textSecondary">
               ¿No tienes una cuenta? Regístrate

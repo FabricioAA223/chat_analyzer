@@ -1,4 +1,4 @@
-import {Box, Typography, Divider} from "@mui/material"
+import {Box, Typography, Divider, Button} from "@mui/material"
 import Results from "./components/Results";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
@@ -20,8 +20,8 @@ function AnalysisFinished() {
                 const analysisInProcess = []
                 // Si hay análisis, actualiza el estado y verifica si alguno tiene imagesResults
                 querySnapshot.forEach(doc => {
-                    if (doc.data().imagesResults.length > 0 || 
-                        doc.data().audiosResults.length > 0 ||
+                    if (doc.data().imagesDescriptions.length > 0 && 
+                        doc.data().audiosTranscriptions.length > 0 && 
                         doc.data().textsResults.length > 0) {
                             analysisInProcess.push(doc.data());
                     }
@@ -32,20 +32,19 @@ function AnalysisFinished() {
             }
         };
 
-        return () => {
-            fetchAnalysis();
-        };
+        fetchAnalysis();
     }, [currentUser.uid]);
 
     return (
-        <Box mt={'130px'}>
+        <Box mt={'130px'} border={'1px black solid'} width={'90%'} mx={'auto'} p={'5px'} borderRadius={'10px'} bgcolor={'#424769'}>
             {analysis.length > 0
             ? <Box>
                 {analysis.map((a)=>
-                    <Results key={a.name} name={a.name} imgResults={a.imagesResults} txtResults={a.textsResults} audioResults={a.audiosResults}/>
+                    <Results key={a.name} name={a.name} txtResults={a.textsResults} imgResults={a.imagesResults} 
+                    audioResults={a.audiosResults} imgDescriptions={a.imagesDescriptions} audiosTranscriptions={a.audiosTranscriptions}/>
                 )}
               </Box>
-            : <Typography textAlign={'center'}>El usuario NO tiene analisis terminados</Typography>}
+            : <Typography my={'20px'} textAlign={'center'}>El usuario NO tiene analisis terminados</Typography>}
         </Box>
     );
 }

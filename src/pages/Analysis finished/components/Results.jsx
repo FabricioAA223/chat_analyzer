@@ -1,34 +1,48 @@
 import React from 'react'
 import {Box, Typography, Divider} from '@mui/material'
+import Grafico from './Grafico';
 
 function Results(props) {
 
     return (
-        <Box key={props.name} border={'1px black solid'} maxWidth={'90%'} mx={'auto'} mt={'40px'} p={'10px'} borderRadius={'10px'} bgcolor={'lightgray'}>
-            <Typography mx={'auto'} textAlign={'center'} fontFamily={'cursive'}><b>Resultados del análisis "{props.name}":</b></Typography>
+        <Box key={props.name} border={'1px black solid'} maxWidth={'95%'} mx={'auto'} m={'20px auto 70px auto'} p={'10px'} borderRadius={'10px'} bgcolor={'#ffffff'}>
+            <Typography textAlign={'center'} fontFamily={'monospace'} color={'black'} fontSize={'30px'}><b>Resultados del análisis "{props.name}":</b></Typography>
             <Divider sx={{bgcolor:'black'}}/>
-            <Box gap={'10px'} justifyContent={'center'} alignItems={'center'} sx={{display:'flex', '@media (max-width: 640px)': {display: 'inline', width: 'auto'}}}>
-                <Box  width={'33%'} m={'auto'} sx={{'@media (max-width: 640px)': {width: 'auto', mt:'10px'}}}>
-                    <Typography mx={'auto'} textAlign={'center'} fontFamily={'cursive'}><b>Categorías presentes en el texto</b></Typography>
-                    {props.txtResults.map((txtRes) =>
-                        <Typography ml={'3px'} key={txtRes} textAlign={'left'}>- {txtRes}</Typography>
-                    )}
+            <Box alignContent={'center'} alignItems={'center'} justifyContent={'center'}>
+                <Box mt={'10px'} >
+                    <Typography mx={'auto'} textAlign={'center'} mb={'20px'} color={'#23273d'} fontSize={'20px'}><b>Categorías presentes en el texto</b></Typography>
+                    {props.txtResults.length > 0 ?
+                    <Grafico data={props.txtResults}/>
+                    :props.audiosTranscriptions.length > 0 && <Typography color={'black'} my={'20px'} ml={'3px'} textAlign={'left'}>No se logró categorizar el text</Typography>}
                 </Box>
-                <Box px={'5px'} borderLeft={'1px solid black'} borderRight={'1px solid black'} width={'33%'} m={'auto'} sx={{'@media (max-width: 640px)': {width: 'auto', my:'10px', border:'none', px:'0'}}}>
-                    <Typography mx={'auto'} textAlign={'center'} fontFamily={'cursive'}><b>Categorías presentes en las imágenes</b></Typography>
-                    {props.imgResults.map((imgRes) =>
-                        <Typography ml={'3px'} key={imgRes} textAlign={'left'}>- {imgRes}</Typography>
+                <Divider sx={{bgcolor:'black', my:'20px'}}/>
+                <Box my={'30px'}>
+                    <Typography mx={'auto'} textAlign={'center'} mb={'20px'} color={'#23273d'} fontSize={'20px'}><b>Categorías presentes en las imágenes</b></Typography>
+                    {props.imgResults.length > 0?
+                    <Grafico data={props.imgResults}/>
+                    :props.audiosTranscriptions.length > 0 && <Typography color={'black'} my={'20px'} ml={'3px'} textAlign={'left'}>No se logró categorizar las imagenes</Typography>}
+                    {props.imgDescriptions.length > 0?
+                    <Typography mx={'auto'} textAlign={'center'} m={'20px auto 10px auto'} color={'#23273d'} fontSize={'20px'}><b>Descripciones de las imágenes presentes en el chat</b></Typography>
+                    :null}
+                    {props.imgDescriptions.map((imgRes) =>
+                        <Typography color={'black'} mb={'20px'} ml={'3px'} key={imgRes} textAlign={'left'}>- {imgRes}</Typography>
                     )}
+                    
                 </Box>
-                <Box width={'33%'} m={'auto'} sx={{'@media (max-width: 640px)': {width: 'auto'}}}>
-                    <Typography mx={'auto'} textAlign={'center'} fontFamily={'cursive'}><b>Categorías presentes en los audios</b></Typography>
-                    {props.audioResults.map((audioRes) =>
-                        <Typography ml={'3px'} key={audioRes} textAlign={'left'}>- {audioRes}</Typography>
-                    )}
+                <Divider sx={{bgcolor:'black', my:'20px'}}/>
+                <Box >
+                    <Typography mx={'auto'} textAlign={'center'} mb={'20px'} color={'#23273d'} fontSize={'20px'}><b>Categorías presentes en los audios</b></Typography>
+                    {props.audioResults.length > 0?
+                    <Grafico data={props.audioResults}/>
+                    :props.audiosTranscriptions.length > 0 && <Typography color={'black'} my={'20px'} ml={'3px'} textAlign={'left'}>No se logró categorizar el audio</Typography>}
+                    {props.audiosTranscriptions.length > 0?
+                    <Typography mx={'auto'} textAlign={'center'} m={'20px auto 10px auto'} color={'#23273d'} fontSize={'20px'}><b>Transcripción de los audios presentes en el chat</b></Typography>
+                    :null}
+                    {props.audiosTranscriptions.map((audioRes) =>
+                        <Typography color={'black'} my={'20px'} ml={'3px'} key={audioRes} textAlign={'left'}>- {audioRes}</Typography>
+                    )}   
                 </Box>
             </Box>
-            
-            {/* <Typography my={'10px'} mx={'auto'} textAlign={'center'} fontFamily={'cursive'}>Se le notificará al correo electrónico cuando se haya terminado y podrá ver los resultados en el apartado de analysis finished</Typography> */}
         </Box>
     );
 }
